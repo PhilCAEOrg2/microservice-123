@@ -110,6 +110,9 @@ public class ResTest {
       // Response body has type JSON Object
       assertThat(response, isA(JSONObject.class));
       
+      // Response body all list entries has field "user" has field "id" has type Number
+      assertThat(response, both(isA(JSONArray.class)).and(asJSONObjectList(everyItem(both(isA(JSONObject.class)).and(asJSONObject(hasField("user", both(isA(JSONObject.class)).and(asJSONObject(hasField("id", isA(Number.class)))))))))));
+      
 
       System.out.println("Result of 'test$HTTP_Method_Name$': " + result.getResponse().trim());
     } catch (Exception e) {
